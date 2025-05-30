@@ -39,3 +39,19 @@ export async function getStaticProps() {
 }
 
 export default Posts;
+import Header from "@/components/layout/Header";
+import React from 'react';
+
+const PostsPage: React.FC = () => {
+  return (
+    <div>
+      <Header />
+      <main className="p-4">
+        <h1 className="text-3xl">Posts Page</h1>
+      </main>
+    </div>
+  );
+};
+
+export default PostsPage;
+

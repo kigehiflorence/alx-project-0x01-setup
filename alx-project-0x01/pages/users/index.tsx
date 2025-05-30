@@ -4,6 +4,21 @@ import { useState } from "react";
 import Header from "@/components/layout/Header";
 import UserCard from "@/components/common/UserCard";
 import { UserProps } from "@/interfaces";
+import Header from "@/components/layout/Header";
+import React from 'react';
+
+const UsersPage: React.FC = () => {
+  return (
+    <div>
+      <Header />
+      <main className="p-4">
+        <h1 className="text-3xl">Users Page</h1>
+      </main>
+    </div>
+  );
+};
+
+export default UsersPage;
 
 interface UsersPageProps {
   posts: UserProps[];
