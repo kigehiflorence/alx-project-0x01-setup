@@ -1,15 +1,22 @@
+import React, { useState } from "react";
 import PostCard from "@/components/common/PostCard";
 import PostModal from "@/components/common/PostModal";
 import Header from "@/components/layout/Header";
 import { PostData, PostProps } from "@/interfaces";
-import { useState } from "react";
 
-const Posts = ({ posts }: { posts: PostProps[] }) => {
+interface PostsPageProps {
+  posts: PostProps[];
+}
+
+const Posts: React.FC<PostsPageProps> = ({ posts }) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [post, setPost] = useState<PostData | null>(null);
+  const [postList, setPostList] = useState<PostData[]>(posts);
 
   const handleAddPost = (newPost: PostData) => {
-    setPost({ ...newPost, id: posts.length + 1 });
+    // Assign new ID based on current length + 1
+    const newPostWithId = { ...newPost, id: postList.length + 1 };
+    setPostList((prevPosts) => [...prevPosts, newPostWithId]);
+    setModalOpen(false);
   };
 
   return (
@@ -25,15 +32,10 @@ const Posts = ({ posts }: { posts: PostProps[] }) => {
             Add Post
           </button>
         </div>
-        <div className="grid grid-cols-3 gap-4">
-          {posts?.map(({ title, body, userId, id }: PostProps, key: number) => (
-            <PostCard
-              title={title}
-              body={body}
-              userId={userId}
-              id={id}
-              key={key}
-            />
+
+        <div className="grid grid-cols-3 gap-2">
+          {postList.map(({ title, body, userId, id }, key) => (
+            <PostCard key={key} title={title} body={body} userId={userId} id={id} />
           ))}
         </div>
       </main>
