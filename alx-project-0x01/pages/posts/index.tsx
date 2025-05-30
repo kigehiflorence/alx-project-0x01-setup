@@ -11,10 +11,12 @@ interface PostsProps {
 const Posts: React.FC<PostsProps> = ({ posts }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [localPosts, setLocalPosts] = useState<PostProps[]>(posts);
+  const [post, setPost] = useState<PostData | null>(null); // <-- included as requested
 
   const handleAddPost = (newPost: PostData) => {
     const newPostWithId = { ...newPost, id: localPosts.length + 1 };
     setLocalPosts([...localPosts, newPostWithId]);
+    setPost(newPostWithId); // <-- update the post state as well
     setModalOpen(false);
   };
 
