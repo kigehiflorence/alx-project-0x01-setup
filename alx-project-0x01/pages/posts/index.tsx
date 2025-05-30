@@ -10,10 +10,12 @@ interface PostsProps {
 
 const Posts: React.FC<PostsProps> = ({ posts }) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [post, setPost] = useState<PostData | null>(null);  // <-- This line was missing
+  const [localPosts, setLocalPosts] = useState<PostProps[]>(posts);
 
   const handleAddPost = (newPost: PostData) => {
-    setPost({ ...newPost, id: posts.length + 1 });
+    const newPostWithId = { ...newPost, id: localPosts.length + 1 };
+    setLocalPosts([...localPosts, newPostWithId]);
+    setModalOpen(false);
   };
 
   return (
@@ -30,9 +32,9 @@ const Posts: React.FC<PostsProps> = ({ posts }) => {
           </button>
         </div>
         <div className="grid grid-cols-3 gap-2">
-          {posts.map(({ title, body, userId, id }, key) => (
+          {localPosts.map(({ title, body, userId, id }: PostProps) => (
             <PostCard
-              key={key}
+              key={id}
               title={title}
               body={body}
               userId={userId}

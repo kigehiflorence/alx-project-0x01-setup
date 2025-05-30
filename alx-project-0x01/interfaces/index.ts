@@ -1,5 +1,4 @@
 // interfaces/index.ts
-
 export interface UserProps {
   id: number;
   name: string;
@@ -39,4 +38,35 @@ export interface UserModalProps {
 export interface PostModalProps {
   onClose: () => void;
   onSubmit: (post: PostData) => void;
+}
+export interface Address {
+  street: string;
+  suite?: string;
+  city: string;
+  zipcode: string;
+  geo?: {
+    lat: string;
+    lng: string;
+  };
+}
+
+export interface Company {
+  name: string;
+  catchPhrase: string;
+  bs?: string;
+}
+
+export interface UserModalProps {
+  onClose: () => void;
+  onSubmit: (post: UserProps) => void;
+}
+export interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: Address;
+  phone?: string;
+  website?: string;
+  company: Company;
 }
